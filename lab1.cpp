@@ -20,7 +20,6 @@
 //     cin>>a;
 //     cin>>b;
 //     cout<<"sum "<<a+b;
-
 //     return 0;
 // }
 
@@ -166,4 +165,31 @@
 
     
 
-//===========----------------=================>>>>>>>
+//===========----------------=================>>>>>>> 
+
+// Q.1. Reverse of an array input={1,2,3,4,5} Output={5,4,3,2,1}
+
+// #include <iostream>
+// using namespace std;
+// int main() {
+//     int n;
+//     cin>>n;
+//     int arr[n];
+//     for(int i=0;i<n;i++){
+//         cin>>arr[i];
+//     }
+//     for(int i=n-1;i>=0;i--){
+//         cout<<arr[i]<<" ";
+//     }
+//     return 0;
+// }
+
+
+// Q.2.Find two elements in array whose sum equals a given target. Input={2,7,11,15,18} , target =17  Output= 7+11=17
+
+  #include <iostream>
+  using namespace std;
+  int main() {
+     
+
+// Q.4. Find duplicate elements in an array. Input={ 1,2,3,4,5,2,1,6,1,5,3}  Output= {1,2,3}
