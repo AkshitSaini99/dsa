@@ -1,0 +1,223 @@
+//lab7
+
+//1
+#include<iostream>
+using namespace std;
+struct N{int d;N*l,*r;};
+
+int main(){
+ N*r=new N{10,0,0};
+ r->l=new N{20,0,0};
+ r->r=new N{30,0,0};
+ cout<<r->d<<" "<<r->l->d<<" "<<r->r->d;
+}
+
+//2
+#include<iostream>
+using namespace std;
+struct N{int d;N*l,*r;};
+
+void in(N*r){
+ if(r){in(r->l);cout<<r->d<<" ";in(r->r);}
+}
+int main(){
+ N*r=new N{10,new N{20,0,0},new N{30,0,0}};
+ in(r);
+}
+
+//3
+#include<iostream>
+using namespace std;
+struct N{int d;N*l,*r;};
+
+void pre(N*r){
+ if(r){cout<<r->d<<" ";pre(r->l);pre(r->r);}
+}
+int main(){
+ N*r=new N{10,new N{20,0,0},new N{30,0,0}};
+ pre(r);
+}
+
+//4
+#include<iostream>
+using namespace std;
+struct N{int d;N*l,*r;};
+
+void post(N*r){
+ if(r){post(r->l);post(r->r);cout<<r->d<<" ";}
+}
+int main(){
+ N*r=new N{10,new N{20,0,0},new N{30,0,0}};
+ post(r);
+}
+
+//5
+#include<iostream>
+using namespace std;
+struct N{int d;N*l,*r;};
+
+void in(N*r){if(r){in(r->l);cout<<r->d<<" ";in(r->r);}}
+void pre(N*r){if(r){cout<<r->d<<" ";pre(r->l);pre(r->r);}}
+void post(N*r){if(r){post(r->l);post(r->r);cout<<r->d<<" ";}}
+
+int main(){
+ N*r=new N{10,new N{20,0,0},new N{30,0,0}};
+ in(r); cout<<"\n"; pre(r); cout<<"\n"; post(r);
+}
+
+//6
+#include<iostream>
+using namespace std;
+struct N{int d;N*l,*r;};
+
+N* ins(N*r,int x){
+ if(!r)return new N{x,0,0};
+ if(x<r->d)r->l=ins(r->l,x);
+ else r->r=ins(r->r,x);
+ return r;
+}
+void in(N*r){if(r){in(r->l);cout<<r->d<<" ";in(r->r);}}
+
+int main(){
+ N*r=0; int n,x; cin>>n;
+ while(n--){cin>>x;r=ins(r,x);}
+ in(r);
+}
+
+//7
+#include<iostream>
+using namespace std;
+struct N{int d;N*l,*r;};
+
+N* ins(N*r,int x){
+ if(!r)return new N{x,0,0};
+ if(x<r->d)r->l=ins(r->l,x);
+ else r->r=ins(r->r,x);
+ return r;
+}
+bool search(N*r,int x){
+ if(!r)return 0;
+ if(r->d==x)return 1;
+ return x<r->d?search(r->l,x):search(r->r,x);
+}
+int main(){
+ N*r=0;int a[]={50,30,70,20,40};
+ for(int x:a)r=ins(r,x);
+ int x;cin>>x;cout<<(search(r,x)?"Found":"Not Found");
+}
+
+//8
+#include<iostream>
+using namespace std;
+struct N{int d;N*l,*r;};
+
+N* ins(N*r,int x){
+ if(!r)return new N{x,0,0};
+ if(x<r->d)r->l=ins(r->l,x);
+ else r->r=ins(r->r,x);
+ return r;
+}
+void in(N*r){if(r){in(r->l);cout<<r->d<<" ";in(r->r);}}
+
+int main(){
+ N*r=0;int n,x;cin>>n;
+ while(n--){cin>>x;r=ins(r,x);}
+ in(r);
+}
+
+//9
+#include<iostream>
+using namespace std;
+struct N{int d;N*l,*r;};
+
+N* del(N*r,int x){
+ if(!r)return r;
+ if(x<r->d)r->l=del(r->l,x);
+ else if(x>r->d)r->r=del(r->r,x);
+ else if(!r->l&&!r->r)return 0;
+ return r;
+}
+void in(N*r){if(r){in(r->l);cout<<r->d<<" ";in(r->r);}}
+
+int main(){
+ N*r=new N{50,new N{30,0,0},new N{70,0,0}};
+ r=del(r,30);in(r);
+}
+
+//10
+N* del(N*r,int x){
+ if(!r)return r;
+ if(x<r->d)r->l=del(r->l,x);
+ else if(x>r->d)r->r=del(r->r,x);
+ else{
+  if(!r->l)return r->r;
+  if(!r->r)return r->l;
+ }
+ return r;
+}
+
+//11
+N* del(N*r,int x){
+ if(!r)return r;
+ if(x<r->d)r->l=del(r->l,x);
+ else if(x>r->d)r->r=del(r->r,x);
+ else{
+  if(!r->l)return r->r;
+  if(!r->r)return r->l;
+  N*t=r->r;
+  while(t->l)t=t->l;
+  r->d=t->d;
+  r->r=del(r->r,t->d);
+ }
+ return r;
+}
+
+//12
+int height(N*r){
+ if(!r)return 0;
+ return 1+max(height(r->l),height(r->r));
+}
+
+//13
+int count(N*r){
+ if(!r)return 0;
+ return 1+count(r->l)+count(r->r);
+}
+
+//14
+int leaf(N*r){
+ if(!r)return 0;
+ if(!r->l&&!r->r)return 1;
+ return leaf(r->l)+leaf(r->r);
+}
+
+//15
+#include<iostream>
+using namespace std;
+struct N{int d;N*l,*r;};
+
+N* ins(N*r,int x){
+ if(!r)return new N{x,0,0};
+ if(x<r->d)r->l=ins(r->l,x);
+ else r->r=ins(r->r,x);
+ return r;
+}
+void in(N*r){if(r){in(r->l);cout<<r->d<<" ";in(r->r);}}
+void pre(N*r){if(r){cout<<r->d<<" ";pre(r->l);pre(r->r);}}
+void post(N*r){if(r){post(r->l);post(r->r);cout<<r->d<<" ";}}
+int h(N*r){return r?1+max(h(r->l),h(r->r)):0;}
+int cnt(N*r){return r?1+cnt(r->l)+cnt(r->r):0;}
+
+int main(){
+ N*r=0;int c,x;
+ do{
+  cout<<"\n1.Insert 2.Inorder 3.Preorder 4.Postorder 5.Height 6.Count 7.Exit\n";
+  cin>>c;
+  if(c==1){cin>>x;r=ins(r,x);}
+  else if(c==2)in(r);
+  else if(c==3)pre(r);
+  else if(c==4)post(r);
+  else if(c==5)cout<<h(r);
+  else if(c==6)cout<<cnt(r);
+ }while(c!=7);
+}
