@@ -1,0 +1,430 @@
+//lab 5
+
+
+//1
+#include <iostream>
+using namespace std;
+
+int stack[5], top = -1;
+
+void push(int x) {
+    if (top == 4)
+        cout << "Stack Overflow\n";
+    else
+        stack[++top] = x;
+}
+
+void pop() {
+    if (top == -1)
+        cout << "Stack Underflow\n";
+    else
+        cout << stack[top--] << " popped\n";
+}
+
+void peek() {
+    if (top == -1)
+        cout << "Stack Empty\n";
+    else
+        cout << "Top = " << stack[top] << endl;
+}
+
+void display() {
+    for (int i = top; i >= 0; i--)
+        cout << stack[i] << " ";
+    cout << endl;
+}
+
+int main() {
+    push(10);
+    push(20);
+    push(30);
+
+    display();
+    peek();
+    pop();
+    display();
+
+    return 0;
+}
+
+//2
+#include <iostream>
+using namespace std;
+
+int main() {
+    int s[3], top = -1;
+
+    for (int i = 1; i <= 4; i++) {
+        if (top == 2)
+            cout << "Stack Overflow\n";
+        else
+            s[++top] = i * 10;
+    }
+
+    return 0;
+}
+
+//3
+#include <iostream>
+using namespace std;
+
+int main() {
+    int s[3], top = -1;
+
+    if (top == -1)
+        cout << "Stack Underflow";
+    else
+        cout << s[top--];
+
+    return 0;
+}
+
+//4
+#include <iostream>
+using namespace std;
+
+int main() {
+    int s[5] = {10, 20, 30};
+    int top = 2;
+
+    if (top == -1)
+        cout << "Stack Empty";
+    else
+        cout << "Top element = " << s[top];
+
+    return 0;
+}
+
+//5
+#include <iostream>
+using namespace std;
+
+int s[5], top = -1;
+
+void push() {
+    int x;
+    cin >> x;
+
+    if (top == 4)
+        cout << "Overflow\n";
+    else
+        s[++top] = x;
+}
+
+void pop() {
+    if (top == -1)
+        cout << "Underflow\n";
+    else
+        cout << s[top--] << " popped\n";
+}
+
+void peek() {
+    if (top == -1)
+        cout << "Empty\n";
+    else
+        cout << "Top = " << s[top] << endl;
+}
+
+void display() {
+    for (int i = top; i >= 0; i--)
+        cout << s[i] << " ";
+    cout << endl;
+}
+
+int main() {
+    int ch;
+
+    do {
+        cout << "\n1.Push 2.Pop 3.Peek 4.Display 5.Exit\n";
+        cin >> ch;
+
+        if (ch == 1) push();
+        else if (ch == 2) pop();
+        else if (ch == 3) peek();
+        else if (ch == 4) display();
+
+    } while (ch != 5);
+
+    return 0;
+}
+
+//6
+#include <iostream>
+using namespace std;
+
+int main() {
+    int s[5], top = -1;
+
+    s[++top] = 10;
+    s[++top] = 20;
+    s[++top] = 30;
+    s[++top] = 40;
+
+    cout << "Stack: ";
+    for (int i = top; i >= 0; i--)
+        cout << s[i] << " ";
+
+    return 0;
+}
+
+//7
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string str, s;
+    cin >> str;
+
+    for (char c : str)
+        s.push_back(c);
+
+    cout << "Reverse: ";
+    for (int i = s.size() - 1; i >= 0; i--)
+        cout << s[i];
+
+    return 0;
+}
+
+//8
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+    string s;
+    cin >> s;
+
+    stack<char> st;
+
+    for (char c : s) {
+        if (c == '(' || c == '[' || c == '{')
+            st.push(c);
+        else if (c == ')' || c == ']' || c == '}') {
+            if (st.empty()) {
+                cout << "Not Balanced";
+                return 0;
+            }
+            st.pop();
+        }
+    }
+
+    if (st.empty())
+        cout << "Balanced";
+    else
+        cout << "Not Balanced";
+
+    return 0;
+}
+
+//9
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int priority(char c) {
+    if (c == '^') return 3;
+    if (c == '*' || c == '/') return 2;
+    if (c == '+' || c == '-') return 1;
+    return 0;
+}
+
+int main() {
+    string s, ans = "";
+    cin >> s;
+    stack<char> st;
+
+    for (char c : s) {
+        if (isalnum(c))
+            ans += c;
+        else {
+            while (!st.empty() && priority(st.top()) >= priority(c)) {
+                ans += st.top();
+                st.pop();
+            }
+            st.push(c);
+        }
+    }
+
+    while (!st.empty()) {
+        ans += st.top();
+        st.pop();
+    }
+
+    cout << ans;
+    return 0;
+}
+
+//10
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+    string s;
+    cin >> s;
+
+    stack<int> st;
+
+    for (char c : s) {
+        if (isdigit(c))
+            st.push(c - '0');
+        else {
+            int b = st.top(); st.pop();
+            int a = st.top(); st.pop();
+
+            if (c == '+') st.push(a + b);
+            if (c == '-') st.push(a - b);
+            if (c == '*') st.push(a * b);
+            if (c == '/') st.push(a / b);
+        }
+    }
+
+    cout << "Result = " << st.top();
+    return 0;
+}
+
+//11
+#include <iostream>
+#include <stack>
+#include <algorithm>
+using namespace std;
+
+int priority(char c) {
+    if (c == '^') return 3;
+    if (c == '*' || c == '/') return 2;
+    if (c == '+' || c == '-') return 1;
+    return 0;
+}
+
+int main() {
+    string s, ans = "";
+    cin >> s;
+
+    reverse(s.begin(), s.end());
+    stack<char> st;
+
+    for (char c : s) {
+        if (isalnum(c))
+            ans += c;
+        else {
+            while (!st.empty() && priority(st.top()) > priority(c)) {
+                ans += st.top();
+                st.pop();
+            }
+            st.push(c);
+        }
+    }
+
+    while (!st.empty()) {
+        ans += st.top();
+        st.pop();
+    }
+
+    reverse(ans.begin(), ans.end());
+    cout << ans;
+
+    return 0;
+}
+
+//12
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a[10], top1 = -1, top2 = 10;
+
+    a[++top1] = 10;
+    a[++top1] = 20;
+
+    a[--top2] = 90;
+    a[--top2] = 80;
+
+    cout << "Stack 1: ";
+    for (int i = 0; i <= top1; i++)
+        cout << a[i] << " ";
+
+    cout << "\nStack 2: ";
+    for (int i = 9; i >= top2; i--)
+        cout << a[i] << " ";
+
+    return 0;
+}
+
+//13
+#include <iostream>
+using namespace std;
+
+class Stack {
+    int s[5], top;
+
+public:
+    Stack() {
+        top = -1;
+    }
+
+    void push(int x) {
+        if (top == 4)
+            cout << "Overflow\n";
+        else
+            s[++top] = x;
+    }
+
+    void pop() {
+        if (top == -1)
+            cout << "Underflow\n";
+        else
+            cout << s[top--] << " popped\n";
+    }
+
+    void display() {
+        for (int i = top; i >= 0; i--)
+            cout << s[i] << " ";
+    }
+};
+
+int main() {
+    Stack st;
+
+    st.push(10);
+    st.push(20);
+    st.push(30);
+
+    st.display();
+    cout << endl;
+    st.pop();
+
+    return 0;
+}
+
+//14
+#include <iostream>
+using namespace std;
+
+int fact(int n) {
+    if (n == 1)
+        return 1;
+
+    return n * fact(n - 1);
+}
+
+int main() {
+    int n = 5;
+
+    cout << "Factorial = " << fact(n);
+
+    return 0;
+}
+
+//15
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Push  : O(1)\n";
+    cout << "Pop   : O(1)\n";
+    cout << "Peek  : O(1)\n";
+    cout << "Display: O(n)\n";
+
+    return 0;
+}
