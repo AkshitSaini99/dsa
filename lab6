@@ -1,0 +1,363 @@
+lab 6
+
+
+//1
+#include <iostream>
+using namespace std;
+
+#define MAX 5
+
+int q[MAX], front = -1, rear = -1;
+
+void enqueue(int x) {
+    if (rear == MAX - 1)
+        cout << "Queue Overflow\n";
+    else {
+        if (front == -1) front = 0;
+        q[++rear] = x;
+    }
+}
+
+void dequeue() {
+    if (front == -1)
+        cout << "Queue Underflow\n";
+    else {
+        cout << "Deleted: " << q[front++] << endl;
+        if (front > rear) front = rear = -1;
+    }
+}
+
+void peek() {
+    if (front == -1) cout << "Queue Empty\n";
+    else cout << "Front: " << q[front] << endl;
+}
+
+void display() {
+    if (front == -1) cout << "Queue Empty\n";
+    else {
+        for (int i = front; i <= rear; i++)
+            cout << q[i] << " ";
+        cout << endl;
+    }
+}
+
+int main() {
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+    display();
+    dequeue();
+    peek();
+    display();
+}
+
+//2
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q[5], rear = -1, x;
+
+    cout << "Enter value: ";
+    cin >> x;
+
+    if (rear == 4)
+        cout << "Queue Overflow";
+    else {
+        q[++rear] = x;
+        cout << x << " inserted at Rear";
+    }
+
+    return 0;
+}
+
+//3
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q[] = {10, 20, 30};
+    int front = 0, rear = 2;
+
+    if (front > rear)
+        cout << "Queue Underflow";
+    else {
+        cout << "Deleted: " << q[front];
+        front++;
+    }
+
+    return 0;
+}
+
+//4
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q[] = {10, 20, 30};
+    int front = 0;
+
+    if (front == -1)
+        cout << "Queue Empty";
+    else
+        cout << "Front element: " << q[front];
+
+    return 0;
+}
+
+//5
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q[] = {10, 20, 30, 40};
+    int front = 0, rear = 3;
+
+    for (int i = front; i <= rear; i++)
+        cout << q[i] << " ";
+
+    return 0;
+}
+
+//6
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q[3], rear = -1;
+
+    for (int i = 0; i < 4; i++) {
+        if (rear == 2)
+            cout << "Queue Overflow\n";
+        else {
+            q[++rear] = (i + 1) * 10;
+            cout << q[rear] << " inserted\n";
+        }
+    }
+
+    return 0;
+}
+
+
+//7
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q[5], front = -1, rear = -1;
+
+    if (front == -1)
+        cout << "Queue Underflow";
+    else
+        cout << "Deleted: " << q[front];
+
+    return 0;
+}
+
+
+//8
+#include <iostream>
+using namespace std;
+
+int q[5], front = -1, rear = -1;
+
+void enqueue() {
+    int x;
+    if (rear == 4)
+        cout << "Overflow\n";
+    else {
+        cout << "Enter value: ";
+        cin >> x;
+        if (front == -1) front = 0;
+        q[++rear] = x;
+    }
+}
+
+void dequeue() {
+    if (front == -1)
+        cout << "Underflow\n";
+    else {
+        cout << "Deleted: " << q[front++] << endl;
+        if (front > rear) front = rear = -1;
+    }
+}
+
+void display() {
+    if (front == -1)
+        cout << "Empty\n";
+    else
+        for (int i = front; i <= rear; i++)
+            cout << q[i] << " ";
+    cout << endl;
+}
+
+int main() {
+    int ch;
+
+    do {
+        cout << "\n1.Enqueue  2.Dequeue  3.Display  4.Exit\n";
+        cin >> ch;
+
+        if (ch == 1) enqueue();
+        else if (ch == 2) dequeue();
+        else if (ch == 3) display();
+
+    } while (ch != 4);
+
+    return 0;
+}
+
+
+//9
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q[] = {10, 20, 30, 40};
+    int front = 0, rear = 3;
+
+    int count = rear - front + 1;
+
+    cout << "Number of elements: " << count;
+
+    return 0;
+}
+
+
+//10
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q[] = {10, 20, 30, 40};
+    int x, found = 0;
+
+    cout << "Enter element: ";
+    cin >> x;
+
+    for (int i = 0; i < 4; i++) {
+        if (q[i] == x) {
+            found = 1;
+            break;
+        }
+    }
+
+    if (found) cout << "Element Found";
+    else cout << "Element Not Found";
+
+    return 0;
+}
+
+//11
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q[] = {25, 10, 40, 15, 30};
+    int max = q[0], min = q[0];
+
+    for (int i = 1; i < 5; i++) {
+        if (q[i] > max) max = q[i];
+        if (q[i] < min) min = q[i];
+    }
+
+    cout << "Maximum: " << max << endl;
+    cout << "Minimum: " << min;
+
+    return 0;
+}
+
+//12
+#include <iostream>
+using namespace std;
+
+int main() {
+    int q[] = {10, 20, 30, 40};
+    int n = 4;
+
+    for (int i = n - 1; i >= 0; i--)
+        cout << q[i] << " ";
+
+    return 0;
+}
+
+
+//13
+#include <iostream>
+using namespace std;
+
+#define N 5
+int q[N], f = -1, r = -1;
+
+void enq(int x) {
+    if ((r + 1) % N == f) cout << "Overflow\n";
+    else {
+        if (f == -1) f = r = 0;
+        else r = (r + 1) % N;
+        q[r] = x;
+    }
+}
+
+void deq() {
+    if (f == -1) cout << "Underflow\n";
+    else {
+        cout << q[f] << " deleted\n";
+        if (f == r) f = r = -1;
+        else f = (f + 1) % N;
+    }
+}
+
+int main() {
+    enq(10); enq(20); enq(30);
+    deq();
+    enq(40);
+}
+
+//14
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node *next;
+};
+
+Node *f = NULL, *r = NULL;
+
+void enq(int x) {
+    Node *n = new Node{x, NULL};
+    if (r == NULL) f = r = n;
+    else r->next = n, r = n;
+}
+
+void deq() {
+    if (f == NULL) cout << "Underflow";
+    else {
+        cout << f->data << " deleted";
+        Node *t = f;
+        f = f->next;
+        if (f == NULL) r = NULL;
+        delete t;
+    }
+}
+
+int main() {
+    enq(10); enq(20); enq(30);
+    deq();
+}
+
+//15
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Linear Queue:\n";
+    cout << "Space reuse: Low\n";
+    cout << "Enqueue: O(1), Dequeue: O(1)\n\n";
+
+    cout << "Circular Queue:\n";
+    cout << "Space reuse: High\n";
+    cout << "Enqueue: O(1), Dequeue: O(1)\n";
+
+    return 0;
+}
